@@ -3,19 +3,30 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Coffee, ArrowRight, Check } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
+import { Coffee, ArrowRight, Check, Loader2, ArrowLeft, User, Mail, Lock } from "lucide-react";
 
 export default function SignUpPage() {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-    agreeTerms: false,
-  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [agreeTerms, setAgreeTerms] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { login } = useAuth();
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    if (!agreeTerms) return;
+    
+    setIsSubmitting(true);
+    
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1800));
+    
+    login(email, name); // Mock signup
+    router.push("/");
   };
 
   return (
@@ -33,6 +44,10 @@ export default function SignUpPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary-dark/80 to-transparent" />
         
         <div className="relative z-10 max-w-lg text-white">
+          <Link href="/" className="mb-12 inline-flex items-center text-sm font-medium text-white/70 hover:text-white transition-colors group">
+            <ArrowLeft size={16} className="mr-2 transform group-hover:-translate-x-1 transition-transform" />
+            Back to Home
+          </Link>
           <div className="flex items-center space-x-3 mb-8">
             <div className="p-3 bg-primary-rust rounded-2xl shadow-xl">
               <Coffee className="w-8 h-8 text-white" />
@@ -83,39 +98,57 @@ export default function SignUpPage() {
               <label className="text-sm font-bold uppercase tracking-widest text-primary-dark/60 ml-1">
                 Full Name
               </label>
-              <input
-                type="text"
-                placeholder="Elara Vance"
-                className="w-full px-6 py-4 rounded-xl bg-white border border-gray-100 shadow-sm focus:border-primary-rust focus:ring-1 focus:ring-primary-rust outline-none transition-all placeholder:text-gray-300"
-                required
-                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-              />
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none text-gray-300 group-focus-within:text-primary-rust transition-colors">
+                  <User size={18} />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Elara Vance"
+                  className="w-full pl-14 pr-6 py-4 rounded-xl bg-white border border-gray-100 shadow-sm focus:border-primary-rust focus:ring-1 focus:ring-primary-rust outline-none transition-all placeholder:text-gray-300"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
             </div>
 
             <div className="space-y-2">
               <label className="text-sm font-bold uppercase tracking-widest text-primary-dark/60 ml-1">
                 Email Address
               </label>
-              <input
-                type="email"
-                placeholder="elara@slowbrew.com"
-                className="w-full px-6 py-4 rounded-xl bg-white border border-gray-100 shadow-sm focus:border-primary-rust focus:ring-1 focus:ring-primary-rust outline-none transition-all placeholder:text-gray-300"
-                required
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              />
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none text-gray-300 group-focus-within:text-primary-rust transition-colors">
+                  <Mail size={18} />
+                </div>
+                <input
+                  type="email"
+                  placeholder="elara@slowbrew.com"
+                  className="w-full pl-14 pr-6 py-4 rounded-xl bg-white border border-gray-100 shadow-sm focus:border-primary-rust focus:ring-1 focus:ring-primary-rust outline-none transition-all placeholder:text-gray-300"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
             </div>
 
             <div className="space-y-2">
               <label className="text-sm font-bold uppercase tracking-widest text-primary-dark/60 ml-1">
                 Password
               </label>
-              <input
-                type="password"
-                placeholder="••••••••"
-                className="w-full px-6 py-4 rounded-xl bg-white border border-gray-100 shadow-sm focus:border-primary-rust focus:ring-1 focus:ring-primary-rust outline-none transition-all placeholder:text-gray-300"
-                required
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-              />
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none text-gray-300 group-focus-within:text-primary-rust transition-colors">
+                  <Lock size={18} />
+                </div>
+                <input
+                  type="password"
+                  placeholder="••••••••"
+                  className="w-full pl-14 pr-6 py-4 rounded-xl bg-white border border-gray-100 shadow-sm focus:border-primary-rust focus:ring-1 focus:ring-primary-rust outline-none transition-all placeholder:text-gray-300"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
             </div>
 
             <div className="flex items-center space-x-3 ml-1 py-2">
@@ -124,7 +157,7 @@ export default function SignUpPage() {
                 id="terms"
                 className="w-5 h-5 rounded border-gray-300 text-primary-rust focus:ring-primary-rust cursor-pointer"
                 required
-                onChange={(e) => setFormData({ ...formData, agreeTerms: e.target.checked })}
+                onChange={(e) => setAgreeTerms(e.target.checked)}
               />
               <label htmlFor="terms" className="text-sm text-gray-text cursor-pointer select-none">
                 I agree to the <Link href="/terms" className="text-primary-rust font-medium hover:underline">Terms of Service</Link> and <Link href="/privacy" className="text-primary-rust font-medium hover:underline">Privacy Policy</Link>
@@ -133,10 +166,20 @@ export default function SignUpPage() {
 
             <button
               type="submit"
-              className="w-full bg-primary-dark text-white py-5 rounded-xl font-bold tracking-widest flex items-center justify-center space-x-3 hover:bg-primary-rust transition-all shadow-xl hover:shadow-primary-rust/20 group"
+              disabled={isSubmitting}
+              className="w-full bg-primary-dark text-white py-5 rounded-xl font-bold tracking-widest flex items-center justify-center space-x-3 hover:bg-primary-rust transition-all shadow-xl hover:shadow-primary-rust/20 group disabled:opacity-70"
             >
-              <span>BEGIN YOUR JOURNEY</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              {isSubmitting ? (
+                <>
+                  <Loader2 size={20} className="animate-spin" />
+                  <span>PREPARING YOUR SPOT...</span>
+                </>
+              ) : (
+                <>
+                  <span>BEGIN YOUR JOURNEY</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </>
+              )}
             </button>
           </form>
 

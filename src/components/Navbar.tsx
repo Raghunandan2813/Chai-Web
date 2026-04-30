@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ShoppingCart, User } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -12,6 +13,8 @@ const navLinks = [
 ];
 
 export function Navbar() {
+  const { user, logout } = useAuth();
+
   return (
     <nav className="flex items-center justify-between px-8 py-6 bg-transparent absolute top-0 left-0 right-0 z-50">
       <div className="flex-1">
@@ -40,15 +43,31 @@ export function Navbar() {
         <button className="hover:text-primary-rust transition-colors">
           <ShoppingCart size={20} />
         </button>
-        <Link 
-          href="/signup" 
-          className="hidden sm:block text-xs font-bold tracking-widest text-primary-rust hover:text-primary-dark transition-colors"
-        >
-          SIGN UP
-        </Link>
-        <Link href="/login" className="p-1 bg-primary-dark text-white rounded-full hover:bg-opacity-90 transition-colors">
-          <User size={18} />
-        </Link>
+        
+        {user ? (
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-medium text-gray-text hidden sm:block italic">Hello, {user.name}</span>
+            <button 
+              onClick={logout}
+              className="p-1.5 bg-primary-rust text-white rounded-full hover:bg-opacity-90 transition-colors shadow-lg"
+              title="Logout"
+            >
+              <User size={16} />
+            </button>
+          </div>
+        ) : (
+          <>
+            <Link 
+              href="/signup" 
+              className="hidden sm:block text-xs font-bold tracking-widest text-primary-rust hover:text-primary-dark transition-colors"
+            >
+              SIGN UP
+            </Link>
+            <Link href="/login" className="p-1.5 bg-primary-dark text-white rounded-full hover:bg-opacity-90 transition-colors shadow-lg">
+              <User size={18} />
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );
