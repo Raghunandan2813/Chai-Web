@@ -40,9 +40,15 @@ export function Navbar() {
         <button className="hover:text-primary-rust transition-colors">
           <ShoppingCart size={20} />
         </button>
-        <button className="p-1 bg-primary-dark text-white rounded-full hover:bg-opacity-90 transition-colors">
+        <Link 
+          href="/signup" 
+          className="hidden sm:block text-xs font-bold tracking-widest text-primary-rust hover:text-primary-dark transition-colors"
+        >
+          SIGN UP
+        </Link>
+        <Link href="/login" className="p-1 bg-primary-dark text-white rounded-full hover:bg-opacity-90 transition-colors">
           <User size={18} />
-        </button>
+        </Link>
       </div>
     </nav>
   );
