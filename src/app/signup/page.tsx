@@ -30,164 +30,169 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="min-h-screen flex bg-bg-cream font-sans overflow-hidden">
-      {/* Left Side: Illustration & Brand */}
-      <div className="hidden lg:flex lg:w-1/2 relative bg-primary-dark items-center justify-center p-12 overflow-hidden">
-        <div className="absolute inset-0 opacity-40">
-          <Image
-            src="/signature-spices.png"
-            alt="Artisanal Spices"
-            fill
-            className="object-cover scale-110 blur-[2px]"
-          />
+    <div className="min-h-screen w-full bg-[radial-gradient(circle_at_top_left,rgba(166,93,31,0.18),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(45,79,30,0.16),transparent_30%),#F9F7F2] flex items-center justify-center overflow-hidden px-4 py-10">
+      <div className="grid max-w-6xl w-full gap-10 lg:grid-cols-[1.05fr_1fr] items-center">
+        <div className="hidden lg:flex relative overflow-hidden rounded-4xl bg-primary-dark/95 p-14 shadow-2xl shadow-primary-dark/20">
+          <div className="absolute inset-0 opacity-40">
+            <Image
+              src="/signature-spices.png"
+              alt="Artisanal Spices"
+              fill
+              className="object-cover scale-105 blur-[1.5px]"
+            />
+          </div>
+          <div className="absolute inset-0 bg-linear-to-br from-primary-dark/85 via-primary-dark/55 to-transparent" />
+
+          <div className="relative z-10 flex flex-col justify-between h-full text-white">
+            <div>
+              <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-white/70 hover:text-white transition-colors">
+                <ArrowLeft size={16} /> Back to Home
+              </Link>
+              <div className="mt-12 inline-flex items-center gap-3 rounded-3xl bg-white/10 px-4 py-3 shadow-xl shadow-black/10">
+                <div className="grid place-items-center h-12 w-12 rounded-3xl bg-primary-rust">
+                  <Coffee className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-[0.35em] text-white/60">Chai Society</p>
+                  <p className="font-semibold text-lg">Exclusive community</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-16 max-w-xl">
+              <h1 className="text-5xl font-serif leading-tight tracking-tight mb-6">Create your account and savor the ritual.</h1>
+              <p className="text-lg text-white/75 leading-relaxed">
+                Join the hearth for curated blends, early access, and thoughtful stories designed for slow moments.
+              </p>
+            </div>
+
+            <div className="mt-10 space-y-4 text-sm text-white/70">
+              <p className="inline-flex items-center gap-3">
+                <span className="h-2.5 w-2.5 rounded-full bg-primary-rust" />
+                Receive new recipes before anyone else.
+              </p>
+              <p className="inline-flex items-center gap-3">
+                <span className="h-2.5 w-2.5 rounded-full bg-primary-rust" />
+                Save your favorites and tasting notes.
+              </p>
+              <p className="inline-flex items-center gap-3">
+                <span className="h-2.5 w-2.5 rounded-full bg-primary-rust" />
+                Enjoy members-only slow-brew events.
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-dark/80 to-transparent" />
-        
-        <div className="relative z-10 max-w-lg text-white">
-          <Link href="/" className="mb-12 inline-flex items-center text-sm font-medium text-white/70 hover:text-white transition-colors group">
-            <ArrowLeft size={16} className="mr-2 transform group-hover:-translate-x-1 transition-transform" />
-            Back to Home
-          </Link>
-          <div className="flex items-center space-x-3 mb-8">
-            <div className="p-3 bg-primary-rust rounded-2xl shadow-xl">
-              <Coffee className="w-8 h-8 text-white" />
+
+        <div className="relative">
+          <div className="absolute -left-10 top-8 h-32 w-32 rounded-full bg-primary-rust/10 blur-3xl" />
+          <div className="absolute right-0 bottom-12 h-40 w-40 rounded-full bg-accent-green/10 blur-3xl" />
+
+          <div className="relative rounded-4xl bg-white/95 p-8 shadow-[0_40px_120px_rgba(17,24,39,0.12)] ring-1 ring-black/5 backdrop-blur-sm">
+            <div className="mb-8 text-center">
+              <p className="text-xs uppercase tracking-[0.35em] text-primary-rust/80">Sign Up</p>
+              <h2 className="mt-4 text-4xl font-serif text-primary-dark">Start your chai story</h2>
+              <p className="mt-2 text-sm text-gray-500">A warm membership for your tastings, blends, and journals.</p>
             </div>
-            <span className="text-2xl font-serif tracking-tight">The Artisanal Hearth</span>
-          </div>
-          
-          <h1 className="text-6xl font-serif leading-tight mb-6">
-            Join our <br />
-            <span className="italic font-normal text-primary-rust">inner circle.</span>
-          </h1>
-          
-          <p className="text-xl text-gray-300 leading-relaxed mb-12">
-            Every sip is a journey. Sign up to receive exclusive recipes, early access to new blends, and stories from the hearth.
-          </p>
-          
-          <div className="space-y-6">
-            {[
-              "First access to limited signature blends",
-              "Invitations to digital slow-bar sessions",
-              "Exclusive heritage-inspired recipes"
-            ].map((feature, i) => (
-              <div key={i} className="flex items-center space-x-4 group">
-                <div className="w-6 h-6 rounded-full bg-accent-green/20 border border-accent-green flex items-center justify-center transition-all group-hover:bg-accent-green">
-                  <Check className="w-4 h-4 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-2">
+                <label htmlFor="name" className="text-sm font-semibold text-primary-dark/80">
+                  Full name
+                </label>
+                <div className="relative">
+                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+                    <User size={18} />
+                  </div>
+                  <input
+                    id="name"
+                    type="text"
+                    placeholder="Elara Vance"
+                    className="w-full rounded-3xl border border-gray-200 bg-white px-14 py-4 text-sm text-gray-900 shadow-sm outline-none transition-all focus:border-primary-rust focus:ring-2 focus:ring-primary-rust/15"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
                 </div>
-                <span className="text-lg text-gray-200">{feature}</span>
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
-      {/* Right Side: Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 md:p-16 relative">
-        {/* Floating Decorative Elements */}
-        <div className="absolute top-20 right-20 w-32 h-32 bg-primary-rust/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-20 w-48 h-48 bg-accent-green/5 rounded-full blur-3xl" />
-
-        <div className="w-full max-w-md animate-in">
-          <div className="mb-10 text-center lg:text-left">
-            <h2 className="text-4xl font-serif text-primary-dark mb-3">Create an Account</h2>
-            <p className="text-gray-text">Step into a world of slow brewing and rich heritage.</p>
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-2">
-              <label className="text-sm font-bold uppercase tracking-widest text-primary-dark/60 ml-1">
-                Full Name
-              </label>
-              <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none text-gray-300 group-focus-within:text-primary-rust transition-colors">
-                  <User size={18} />
+              <div className="space-y-2">
+                <label htmlFor="email" className="text-sm font-semibold text-primary-dark/80">
+                  Email address
+                </label>
+                <div className="relative">
+                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+                    <Mail size={18} />
+                  </div>
+                  <input
+                    id="email"
+                    type="email"
+                    placeholder="elara@slowbrew.com"
+                    className="w-full rounded-3xl border border-gray-200 bg-white px-14 py-4 text-sm text-gray-900 shadow-sm outline-none transition-all focus:border-primary-rust focus:ring-2 focus:ring-primary-rust/15"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
                 </div>
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="password" className="text-sm font-semibold text-primary-dark/80">
+                  Password
+                </label>
+                <div className="relative">
+                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+                    <Lock size={18} />
+                  </div>
+                  <input
+                    id="password"
+                    type="password"
+                    placeholder="••••••••"
+                    className="w-full rounded-3xl border border-gray-200 bg-white px-14 py-4 text-sm text-gray-900 shadow-sm outline-none transition-all focus:border-primary-rust focus:ring-2 focus:ring-primary-rust/15"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
                 <input
-                  type="text"
-                  placeholder="Elara Vance"
-                  className="w-full pl-14 pr-6 py-4 rounded-xl bg-white border border-gray-100 shadow-sm focus:border-primary-rust focus:ring-1 focus:ring-primary-rust outline-none transition-all placeholder:text-gray-300"
+                  type="checkbox"
+                  id="terms"
+                  className="mt-1 h-5 w-5 rounded border-gray-300 text-primary-rust focus:ring-primary-rust cursor-pointer"
                   required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => setAgreeTerms(e.target.checked)}
                 />
+                <label htmlFor="terms" className="text-sm leading-6 text-gray-600">
+                  I agree to the <Link href="/terms" className="text-primary-rust font-medium hover:underline">Terms of Service</Link> and <Link href="/privacy" className="text-primary-rust font-medium hover:underline">Privacy Policy</Link>.
+                </label>
               </div>
-            </div>
 
-            <div className="space-y-2">
-              <label className="text-sm font-bold uppercase tracking-widest text-primary-dark/60 ml-1">
-                Email Address
-              </label>
-              <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none text-gray-300 group-focus-within:text-primary-rust transition-colors">
-                  <Mail size={18} />
-                </div>
-                <input
-                  type="email"
-                  placeholder="elara@slowbrew.com"
-                  className="w-full pl-14 pr-6 py-4 rounded-xl bg-white border border-gray-100 shadow-sm focus:border-primary-rust focus:ring-1 focus:ring-primary-rust outline-none transition-all placeholder:text-gray-300"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-            </div>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="flex w-full items-center justify-center gap-3 rounded-3xl bg-primary-dark px-6 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-xl shadow-primary-dark/15 transition-all hover:bg-primary-rust disabled:cursor-not-allowed disabled:opacity-70"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 size={18} className="animate-spin" />
+                    Creating account...
+                  </>
+                ) : (
+                  <>
+                    Create my account
+                    <ArrowRight size={18} />
+                  </>
+                )}
+              </button>
+            </form>
 
-            <div className="space-y-2">
-              <label className="text-sm font-bold uppercase tracking-widest text-primary-dark/60 ml-1">
-                Password
-              </label>
-              <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none text-gray-300 group-focus-within:text-primary-rust transition-colors">
-                  <Lock size={18} />
-                </div>
-                <input
-                  type="password"
-                  placeholder="••••••••"
-                  className="w-full pl-14 pr-6 py-4 rounded-xl bg-white border border-gray-100 shadow-sm focus:border-primary-rust focus:ring-1 focus:ring-primary-rust outline-none transition-all placeholder:text-gray-300"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-3 ml-1 py-2">
-              <input
-                type="checkbox"
-                id="terms"
-                className="w-5 h-5 rounded border-gray-300 text-primary-rust focus:ring-primary-rust cursor-pointer"
-                required
-                onChange={(e) => setAgreeTerms(e.target.checked)}
-              />
-              <label htmlFor="terms" className="text-sm text-gray-text cursor-pointer select-none">
-                I agree to the <Link href="/terms" className="text-primary-rust font-medium hover:underline">Terms of Service</Link> and <Link href="/privacy" className="text-primary-rust font-medium hover:underline">Privacy Policy</Link>
-              </label>
-            </div>
-
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-primary-dark text-white py-5 rounded-xl font-bold tracking-widest flex items-center justify-center space-x-3 hover:bg-primary-rust transition-all shadow-xl hover:shadow-primary-rust/20 group disabled:opacity-70"
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 size={20} className="animate-spin" />
-                  <span>PREPARING YOUR SPOT...</span>
-                </>
-              ) : (
-                <>
-                  <span>BEGIN YOUR JOURNEY</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </>
-              )}
-            </button>
-          </form>
-
-          <div className="mt-12 text-center text-gray-text">
-            Already a member?{" "}
-            <Link href="/login" className="text-primary-dark font-bold hover:text-primary-rust transition-colors">
-              Sign In to your Hearth
-            </Link>
+            <p className="mt-8 text-center text-sm text-gray-500">
+              Already have an account?{' '}
+              <Link href="/login" className="font-semibold text-primary-dark hover:text-primary-rust">
+                Sign in instead
+              </Link>
+            </p>
           </div>
         </div>
       </div>
